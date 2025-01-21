@@ -18,6 +18,7 @@ describe("This is Suite", function(){
 
         // Add to card product 
         cy.contains("Shop Name").should("be.visible"); // txt visible assertion
+        
         cy.get(".row app-card").should("have.length",4) // assertion toal product 
 
         cy.get(".row .card").each(($el , index , $list )=>{
@@ -44,7 +45,7 @@ describe("This is Suite", function(){
                 cy.log("product not matched")
             }
         })
-        //checkout product name validation 
+        //checkout product price validation 
         let sum = 0;
         cy.get("tr td:nth-child(4) strong").each(($el, index , $list)=>{
             let price = $el.text();
