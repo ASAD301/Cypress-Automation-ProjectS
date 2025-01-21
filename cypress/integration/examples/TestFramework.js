@@ -20,7 +20,7 @@ describe("This is Suite", function(){
         // checkout page 
         const checkoutPage = new CheckoutPage();
         checkoutPage.productNameValidation("iphone X", "Blackberry");
-        checkoutPage.pricevaliation(200000); // price should less than it
+        checkoutPage.productPrice(200000);
         checkoutPage.checkoutProduct();
 
         //Confirm order page 

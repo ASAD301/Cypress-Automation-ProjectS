@@ -53,8 +53,9 @@ describe("This is Suite", function(){
             cy.log(priceMoney);
             sum = sum + Number(priceMoney);
             cy.log("Total price = "+sum);
+        }).then(()=>{
+            expect(sum).to.be.lessThan(200000);
         })
-        expect(sum).to.be.lessThan(200000);
         cy.contains("button", "Checkout").click();
 
         //Order Confirm page 

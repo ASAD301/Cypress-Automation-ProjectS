@@ -15,7 +15,7 @@ class CheckoutPage{
     })
     }
 
-    productPrice(){
+    productPrice(validatePrice){
         let sum = 0;
         cy.get("tr td:nth-child(4) strong").each(($el, index , $list)=>{
             let price = $el.text();
@@ -23,14 +23,17 @@ class CheckoutPage{
             cy.log(priceMoney);
             sum = sum + Number(priceMoney);
             cy.log("Total price = "+sum);
+        }).then(()=>{
+            expect(sum).to.be.lessThan(validatePrice);
         })
-        return sum;
-    }
-
-    pricevaliation(validatePrice){
-        expect(this.productPrice()).to.be.lessThan(validatePrice);
        
     }
+
+    // pricevaliation(validatePrice){
+    //     expect(this.productPrice()).to.be.lessThan(validatePrice);
+    //     cy.get(this.productPrice).should("have.value")
+       
+    // } => here js not follow async formate so that use than to follow cy async model
 
     checkoutProduct(){
         cy.contains("button", "Checkout").click();
