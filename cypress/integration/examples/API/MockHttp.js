@@ -21,8 +21,15 @@ describe("Api Test suit", function(){
             }
         ).as("bookretrievals");
         cy.contains("button", "Virtual Library").click();
-        cy.wait("@bookretrievals");
-        cy.get('p').should("have.text", "Oops only 1 Book available");
+        cy.wait("@bookretrievals").then(function({request, response}){ // then function use two property {request , respons }
+            // verify api respons count and web element count  
+            cy.get("tr").should("have.length", response.body.length+1 )
+            response.body.length
+        })
+        cy.get('p').should("have.text", "Oops only 1 Book available"); 
+
+        // length of respons array = rows of the table (should match)
+
 
     })
 })
