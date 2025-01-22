@@ -24,7 +24,6 @@ describe("Api Test suit", function(){
         cy.wait("@bookretrievals").then(function({request, response}){ // then function use two property {request , respons }
             // verify api respons count and web element count  
             cy.get("tr").should("have.length", response.body.length+1 )
-            response.body.length
         })
         cy.get('p').should("have.text", "Oops only 1 Book available"); 
 
