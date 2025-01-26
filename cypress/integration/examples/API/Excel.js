@@ -34,12 +34,17 @@ describe("Api Session ",()=>{
         cy.get(".action__submit").click();
         cy.wait(3000);
         cy.get("tr button").contains("Excel").click();
-        //excel download file path 
+        //excel download file path // pull the file or files data use Cypress
         const filePath = Cypress.config('fileServerFolder') + "/cypress/downloads/order-invoice_asad.jatri.xlsx";
 
         // excell code setup at config.js file as task 
         cy.task("excelToJsonConverter", filePath).then(function(result){
-            cy.log(result);
+            cy.log(result.data[1].A); // read order id 
+            expect(pname).to.equal(result.data[1].B);
+        })
+
+        cy.readFile(filePath).then(function(text){ // only check entety present in file or not 
+            expect(text).to.include(pname);
         })
        
         
