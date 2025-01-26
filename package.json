@@ -9,9 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  
   "devDependencies": {
     "cypress": "^14.0.0",
     "neat-csv": "5.1.0"
+  },
+  "dependencies": {
+    "convert-excel-to-json": "^1.7.0"
   }
 }

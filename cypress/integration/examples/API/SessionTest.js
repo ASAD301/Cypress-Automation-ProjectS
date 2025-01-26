@@ -1,11 +1,11 @@
 /// <reference types = "cypress"/>
-//const cypress = require("cypress")
 const neatCSV = require("neat-csv")
+
 let pname; // product name 
 let orderNumbr;
 
 describe("Api Session ",()=>{
-    it("loged in through local storaage",async ()=>{
+    it("loged in through local storaage", async ()=>{
         cy.LoginAPI().then(function()
         {
             cy.visit("https://rahulshettyacademy.com/client/",
@@ -16,7 +16,7 @@ describe("Api Session ",()=>{
             })
         })
         cy.get(".card-body b").eq(1).then((element)=>{
-             pname = element.text();
+            pname = element.text();
             cy.log(pname)
         })
         cy.get(".card-body ").eq(1).contains("Add To Cart").click();
