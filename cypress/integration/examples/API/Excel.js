@@ -1,8 +1,6 @@
 /// <reference types = "cypress"/>
 //const cypress = require("cypress")
-// *** excel file convert json 
-const excelToJson = require('convert-excel-to-json');
-const fs = require('fs');
+
 let pname; // product name 
 let orderNumbr;
 
@@ -36,11 +34,14 @@ describe("Api Session ",()=>{
         cy.get(".action__submit").click();
         cy.wait(3000);
         cy.get("tr button").contains("Excel").click();
-        
-        //excel file convert json
-        const result = excelToJson({
-            source: fs.readFileSync('SOME-EXCEL-FILE.xlsx') // fs.readFileSync return a Buffer
-            });
+        //excel download file path 
+        const filePath = Cypress.config('fileServerFolder') + "/cypress/downloads/order-invoice_asad.jatri.xlsx";
+
+        // excell code setup at config.js file as task 
+        cy.task("excelToJsonConverter", filePath).then(function(result){
+            cy.log(result);
+        })
+       
         
     })
 })

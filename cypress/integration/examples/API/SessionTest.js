@@ -37,7 +37,7 @@ describe("Api Session ",()=>{
         
         //Cypress.config("fileServerFolder")  to create download file global path
         // cy.readfile > read file from path 
-        cy.readFile(Cypress.config("fileServerFolder")+ "/cypress/downloads/order-invoice_asad.jatri.csv")
+        cy.readFile(Cypress.config('fileServerFolder') + "/cypress/downloads/order-invoice_asad.jatri.csv")
         .then(async (text)=>{
             const csv = await neatCSV(text);
             console.log(csv);
