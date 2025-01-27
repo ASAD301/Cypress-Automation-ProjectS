@@ -19,6 +19,7 @@ async function setupNodeEvents(on, config) {
   on("task", {
     // user carly bracket for multiple parameter
     async excelTestWrite({searchProduct, writeProduct,priceChange,  filePath}){ 
+      const workbook = new Exceljs.Workbook(); // create workboox object
       await workbook.xlsx.readFile(filePath); // promis  
       const workSheet = workbook.getWorksheet("Sheet1") //read target Sheet1
   
@@ -28,8 +29,16 @@ async function setupNodeEvents(on, config) {
      // const cell =  workSheet.getCell(output.row, output.col) // access cell value to change name
       const cell =  workSheet.getCell(output.row, output.col+priceChange.col); // access cell value to change price
       cell.value = writeProduct ;
-      await workbook.xlsx.writeFile(filePath);
+      
       console.log("Product Change to:"+ cell.value); // write product name
+      return workbook.xlsx.writeFile(filePath).then(()=>
+      {
+        return true;
+      })
+      .catch((error)=>
+      {
+        return false;
+      })
   }
   })
    
@@ -54,6 +63,6 @@ module.exports = defineConfig({
   
   e2e: {
     setupNodeEvents,
-    specPattern:"cypress/integration/examples/API/*.js"
+    specPattern:"cypress/integration/examples/*.js"
   },
 });
